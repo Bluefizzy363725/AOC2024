@@ -17,11 +17,8 @@ x = re.findall("mul\([0-9]+,[0-9]+\)", text)
 
 
 for i in x:
-    i = i.lstrip('mul')
-    i = i.strip('()')
-    i = i.split(',')
-    j = int(i[0])*int(i[1])
-    total += j
+    i = i.lstrip('mul').strip('()').split(',')
+    total += int(i[0])*int(i[1])
   
     
 
