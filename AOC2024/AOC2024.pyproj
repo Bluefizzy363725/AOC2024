@@ -74,6 +74,7 @@
     <Content Include="d7.txt" />
     <Content Include="d8.txt" />
     <Content Include="d9.txt" />
+    <Content Include="puzzleInput.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

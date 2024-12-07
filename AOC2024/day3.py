@@ -1,8 +1,11 @@
+import re
+
+
+
 # PART 1
 
 
 
-import re
 total = 0
 
 
@@ -30,7 +33,6 @@ print(total)
 
 
 
-import re
 total = 0
 x = []
 

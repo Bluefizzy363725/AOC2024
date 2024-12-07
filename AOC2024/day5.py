@@ -1,8 +1,11 @@
+import re
+
+
+
 # PART 1
 
 
 
-import re
 itemsL = []
 itemsR = []
 addLis = []
@@ -74,7 +77,6 @@ print(total)
 
 
 
-import re
 itemsL = []
 itemsR = []
 addLis = []

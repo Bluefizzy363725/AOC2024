@@ -2,9 +2,6 @@
 
 
 
-from tabnanny import check
-
-
 with open('d2.txt', 'r+') as f:
     x = f.readlines()
 
