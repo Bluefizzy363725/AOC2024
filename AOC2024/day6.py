@@ -58,7 +58,7 @@ def move(guardPos):
                 txt[x] = re.sub('[\^]','*',txt[x])
                 txt[x-1] = f'{txt[x-1][:y]}^{txt[x-1][y+1:]}'
         case 'v':
-            movePos = [x+1, len(txt[x]), y]
+            movePos = [x+1, y]
             collision = colliders(collision, movePos)
             if collision == 1:
                 txt[x] = re.sub('[v]','<',txt[x])
@@ -98,14 +98,14 @@ while end == False:
 
 
 
-    '''
+    
 
     # TO SIMULATE IT
 
     os.system('cls')
     for i in txt:
         print(i)
-    '''
+    
 
 
 
@@ -119,3 +119,183 @@ for i in starLis:
 
 
 print(count)
+
+
+# PART 2
+
+
+
+
+
+
+
+
+
+
+
+
+'''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+end = False
+starLis = []
+count = 1
+turn = False
+
+with open('d6.txt','r+') as f:
+    txt = f.readlines()
+
+
+
+def movePt2(guardPos, turn):
+    collision = 0
+    end = False
+    x = guardPos[0] # Lines
+    y = guardPos[-1] # Characters
+    match txt[x][y]:
+        case '^':
+            movePos = [x-1, y]
+            collision = colliders(collision, movePos)
+            if collision == 1:
+                txt[x] = re.sub('[\^]','>',txt[x])
+                turn = True
+            elif collision == 2:
+                end = True
+            else:
+                if turn == True:
+                    txt[x] = re.sub('[\^]','+',txt[x])
+                    turn = False
+                else:
+                    #txt[x] = re.sub('[\^]','|',txt[x])
+                    txt[x] = f'{txt[x][:y]}|{txt[x][y+1:]}'
+                txt[x-1] = f'{txt[x-1][:y]}^{txt[x-1][y+1:]}'
+        case '>':
+            movePos = [x, y+1]
+            collision = colliders(collision, movePos)
+            if collision == 1:
+                txt[x] = re.sub('[>]','v',txt[x])
+                turn = True
+            elif collision == 2:
+                end = True
+            else:
+                if turn == True:
+                    txt[x]  = re.sub('[>][\.|\||-|\+]','+>',txt[x])
+                    turn = False
+                else:
+                    txt[x] = re.sub('[>][\.|\||-|\+]','->',txt[x])
+        case 'v':
+            movePos = [x+1, y]
+            collision = colliders(collision, movePos)
+            if collision == 1:
+                txt[x] = re.sub('[v]','<',txt[x])
+                turn = True
+            elif collision == 2:
+                end = True
+            else:
+                if turn == True:
+                    txt[x] = re.sub('[v]','+',txt[x])
+                    turn = False
+                else:
+                    txt[x] = re.sub('[v]','|',txt[x])
+                    #txt[x] = f'{txt[x][:y]}|{txt[x][y+1:]}'
+                txt[x+1] = f'{txt[x+1][:y]}v{txt[x+1][y+1:]}'
+        case '<':
+            movePos = [x, y-1]
+            collision = colliders(collision, movePos)
+            if collision == 1:
+                txt[x] = re.sub('[<]','^',txt[x])
+                turn = True
+            elif collision == 2:
+                end = True
+            else:
+                if turn == True:
+                    txt[x] = re.sub('[\.|\||-|\+][<]','<+',txt[x])
+                    turn = False
+                else:
+                    txt[x] = re.sub('[\.|\||-|\+][<]','<-',txt[x])
+    return end, turn
+
+while end == False:
+    try:
+        guardPos = positionFind(txt)
+        end, turn = movePt2(guardPos,turn)
+    except IndexError:
+        break
+
+    
+    # TO SIMULATE IT
+
+    os.system('cls')
+    for i in txt:
+        print(i)
+    
+
+
+for i in txt:
+    temp = re.findall('[\*]',i)
+    starLis.append(temp)
+starLis = filter(None,starLis)
+for i in starLis:
+    count += len(i)
+
+print(count)
+
+'''
